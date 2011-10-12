@@ -1,0 +1,38 @@
+Vagrant::Config.run do |config|
+  config.vm.define :web do |web_config|
+    web_config.vm.box = "lucid32"
+    web_config.vm.network "33.33.33.11"
+    
+    web_config.vm.provision :chef_solo do |chef|
+  	  chef.cookbooks_path = "cookbooks"	  
+
+      chef.add_recipe "apt"     #We include the apt recipe to induce an "apt-get update"
+  	  chef.add_recipe "java"
+  	  chef.add_recipe "tomcat"
+  	  chef.add_recipe "base"
+    end
+  end
+
+  config.vm.define :db do |db_config|
+    db_config.vm.box = "lucid32"
+    db_config.vm.network "33.33.33.10"
+    
+    db_config.vm.provision :chef_solo do |chef|
+  	  chef.cookbooks_path = "cookbooks"
+  	  
+      chef.add_recipe "apt"     #We include the apt recipe to induce an "apt-get update"
+      chef.add_recipe "openssl"
+  	  chef.add_recipe "mysql::server"
+  	  chef.add_recipe "mysql_base"
+  	  
+  	  chef.json.merge!({
+        :mysql => {
+          :server_root_password => "supersecure",
+          :bind_address => "33.33.33.10"
+        }
+      })
+
+      
+    end
+  end
+end
