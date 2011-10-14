@@ -9,7 +9,7 @@ Vagrant::Config.run do |config|
       chef.add_recipe "apt"     #We include the apt recipe to induce an "apt-get update"
   	  chef.add_recipe "java"
   	  chef.add_recipe "tomcat"
-  	  chef.add_recipe "base"
+  	  chef.add_recipe "web_base"
     end
   end
 
@@ -23,7 +23,7 @@ Vagrant::Config.run do |config|
       chef.add_recipe "apt"     #We include the apt recipe to induce an "apt-get update"
       chef.add_recipe "openssl"
   	  chef.add_recipe "mysql::server"
-  	  chef.add_recipe "mysql_base"
+  	  chef.add_recipe "db_base"
   	  
   	  chef.json.merge!({
         :mysql => {

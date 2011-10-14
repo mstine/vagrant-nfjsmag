@@ -1,12 +1,3 @@
-#
-# Cookbook Name:: base
-# Recipe:: default
-#
-# Copyright 2011, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
-
 # This gem is necessary for Chef shadow password management to work
 gem_package "libshadow" do 
   action :install
@@ -42,7 +33,7 @@ directory "/u" do
 end
 
 cookbook_file "/home/fluffbox/.ssh/authorized_keys" do
-  source "mstine/authorized_keys"
+  source "fluffbox/authorized_keys"
   mode "0644"
 end
 
