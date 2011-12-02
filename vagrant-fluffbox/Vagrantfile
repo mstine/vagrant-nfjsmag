@@ -31,7 +31,7 @@ Vagrant::Config.run do |config|
           :bind_address => "33.33.33.10"
         }
       })
-
+  
       
     end
   end
